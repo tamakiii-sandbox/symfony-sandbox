@@ -14,6 +14,12 @@ services:
     volumes:
       - .:/work
 
+  node:
+    build: ./docker/node
+    working_dir: /work/app
+    volumes:
+      - .:/work
+
   mysql:
     image: mysql:5.7
     environment:
