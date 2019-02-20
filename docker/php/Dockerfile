@@ -4,5 +4,5 @@ RUN apk add --update make libzip-dev zip
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin
 
-RUN docker-php-ext-configure zip --with-libzip \
- && docker-php-ext-install zip
+RUN docker-php-ext-configure zip --with-libzip && \
+    docker-php-ext-install zip
