@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  php:
+    build: ./docker/php
+    working_dir: /app
+    volumes:
+      - .:/app
+
+  nginx:
+    build: ./docker/nginx
+    working_dir: /app
+    ports:
+      - ${HOST_PORT_HTTP:-8080}:80
+    volumes:
+      - .:/app
+

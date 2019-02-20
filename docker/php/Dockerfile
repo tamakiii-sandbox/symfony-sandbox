@@ -1,0 +1,3 @@
+FROM php:7.3.2-fpm-alpine
+
+RUN apk add --update make
