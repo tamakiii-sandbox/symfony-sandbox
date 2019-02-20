@@ -4,7 +4,7 @@ services:
     build: ./docker/php
     working_dir: /work/app
     volumes:
-      - .:/work
+      - .:/work:delegated
 
   nginx:
     build: ./docker/nginx
@@ -12,13 +12,15 @@ services:
     ports:
       - ${HOST_PORT_HTTP:-8080}:80
     volumes:
-      - .:/work
+      - .:/work:delegated
 
   node:
     build: ./docker/node
     working_dir: /work/app
+    entrypoint: npx encore dev --watch --config webpack.config.ssr.js
     volumes:
       - .:/work
+      - node_modules:/work/app/node_modules
 
   mysql:
     image: mysql:5.7
@@ -33,4 +35,6 @@ services:
 
 volumes:
   mysql:
+    driver: local
+  node_modules:
     driver: local

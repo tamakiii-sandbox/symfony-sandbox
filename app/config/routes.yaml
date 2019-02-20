@@ -1,6 +1,10 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+   path: /
+   controller: App\Controller\IndexController::index
+
+runtimes:
+   path: /runtimes
+   controller: App\Controller\IndexController::runtimes
 
 # the "app_lucky_number" route name is not important yet
 app_lucky_number:
