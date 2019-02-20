@@ -14,3 +14,17 @@ services:
     volumes:
       - .:/work
 
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: symfony
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: pass
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./docker/mysql/etc/mysql/conf.d/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+
+volumes:
+  mysql:
+    driver: local
