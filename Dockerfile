@@ -1,8 +1,18 @@
-FROM php:7.3.2-fpm-alpine
+FROM php:7.4.9-fpm
 
-RUN apk add --update make libzip-dev zip
+WORKDIR /work/app
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin
+RUN curl -sS https://getcomposer.org/installer | \
+      php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN docker-php-ext-configure zip --with-libzip && \
+RUN apt update && \
+    apt install -y --no-install-recommends \
+      make \
+      libzip-dev \
+      && \
+    apt clean -y && \
+    apt autoremove -y && \
+    rm -r /var/lib/apt/lists/*
+
+RUN docker-php-ext-configure zip && \
     docker-php-ext-install zip

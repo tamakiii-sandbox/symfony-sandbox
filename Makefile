@@ -1,8 +1,14 @@
+.PHONY: help install clean
 
-.env:
-	touch $@
-	echo UID=$(shell id -u) >> $@
-	echo GID=$(shell id -g) >> $@
+help:
+	@cat $(firstword $(MAKEFILE_LIST))
+
+install: \
+	dependencies \
+	vendor
+
+vendor:
+	composer install
 
 clean:
-	rm .env
+	rm -rf vendor
